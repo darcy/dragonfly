@@ -77,7 +77,9 @@ module Dragonfly
             storage.get_object_url(bucket_name, uid, opts[:expires])
           end
         else
-          "http://#{bucket_name}.s3.amazonaws.com/#{uid}"
+          opts ||= {}
+          opts[:protocol] ||= "http"
+          "#{opts[:protocol]}://s3.amazonaws.com/#{bucket_name}/#{uid}"
         end
       end
 
